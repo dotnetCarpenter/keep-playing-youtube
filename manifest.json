@@ -1,0 +1,71 @@
+{
+	"manifest_version": 3,
+	"name": "keep-playing-youtube",
+	"description": "auto press keep playing button",
+	"version": "0.0.1",
+	"icons": {
+		"48": "icons/icon_dark.svg",
+		"64": "icons/icon_dark.svg",
+		"96": "icons/icon_dark.svg",
+		"128": "icons/icon_dark.svg"
+	},
+	"host_permissions": [
+		"*://music.youtube.com/*",
+		"*://wwww.youtube.com/*",
+		"*://m.youtube.com/*"
+	],
+	"content_scripts": [
+		{
+			"matches": [
+				"*://music.youtube.com/*",
+				"*://wwww.youtube.com/*",
+				"*://m.youtube.com/*"
+			],
+			"js": [
+				"content_script.js"
+			]
+		}
+	],
+	"browser_action": {
+		"default_icon": {
+			"48": "icons/icon_dark.svg",
+			"64": "icons/icon_dark.svg",
+			"96": "icons/icon_dark.svg",
+			"128": "icons/icon_dark.svg"
+		},
+		"default_popup": "browserAction/index.html",
+		"default_title": "Video paused. Continue watching?",
+		"theme_icons": [
+      {
+        "dark": "icon_dark.svg",
+        "light": "icon-light.svg",
+        "size": 64
+      },
+      {
+        "dark": "icon_dark.svg",
+        "light": "icon-light.svg",
+        "size": 48
+      },
+      {
+        "dark": "icon_dark.svg",
+        "light": "icon-light.svg",
+        "size": 32
+      },
+      {
+        "dark": "icon_dark.svg",
+        "light": "icon-light.svg",
+        "size": 16
+      }
+    ]
+	},
+	"page_action": {
+		"default_icon": {
+			"64": "icons/icon.png"
+		},
+		"default_popup": "pageAction/index.html",
+		"default_title": "keep-playing-youtube"
+	},
+	"options_ui": {
+		"page": "options/index.html"
+	}
+}
