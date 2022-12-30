@@ -1,7 +1,7 @@
 {
 	"manifest_version": 3,
-	"name": "keep-playing-youtube",
-	"description": "auto press keep playing button",
+	"name": "Keep Playing YouTube",
+	"description": "Auto press the \"Video paused. Continue watching?\" button",
 	"version": "0.0.1",
 	"icons": {
 		"48": "icons/icon_dark.svg",
@@ -10,30 +10,31 @@
 		"128": "icons/icon_dark.svg"
 	},
 	"host_permissions": [
-		"*://music.youtube.com/*",
-		"*://wwww.youtube.com/*",
-		"*://m.youtube.com/*"
+		"https://music.youtube.com/watch*",
+		"https://wwww.youtube.com/*",
+		"https://m.youtube.com/*"
 	],
 	"content_scripts": [
 		{
 			"matches": [
-				"*://music.youtube.com/*",
-				"*://wwww.youtube.com/*",
-				"*://m.youtube.com/*"
+				"https://music.youtube.com/watch*",
+				"https://wwww.youtube.com/*",
+				"https://m.youtube.com/*"
 			],
 			"js": [
 				"content_script.js"
 			]
 		}
 	],
-	"browser_action": {
+	"action": {
+		"browser_style": true,
 		"default_icon": {
 			"48": "icons/icon_dark.svg",
 			"64": "icons/icon_dark.svg",
 			"96": "icons/icon_dark.svg",
 			"128": "icons/icon_dark.svg"
 		},
-		"default_popup": "browserAction/index.html",
+		"default_popup": "action/index.html",
 		"default_title": "Video paused. Continue watching?",
 		"theme_icons": [
       {
@@ -57,13 +58,6 @@
         "size": 16
       }
     ]
-	},
-	"page_action": {
-		"default_icon": {
-			"64": "icons/icon.png"
-		},
-		"default_popup": "pageAction/index.html",
-		"default_title": "keep-playing-youtube"
 	},
 	"options_ui": {
 		"page": "options/index.html"

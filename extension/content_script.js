@@ -54,7 +54,7 @@ const clickYes = button => button.dispatchEvent (new MouseEvent("click"))
 //    on :: String -> Function -> HtmlElement -> Void
 const on = eventName => f => HtmlElement => {
   console.debug ("on", eventName, HtmlElement, f)
-  return  HtmlElement.addEventListener (eventName, f)
+  return HtmlElement.addEventListener (eventName, f)
 }
 
 //    keepPlaying ::
