@@ -3,6 +3,7 @@
 	"name": "Keep Playing YouTube",
 	"description": "Auto press the \"Video paused. Continue watching?\" button",
 	"version": "0.0.1",
+	"homepage_url": "https://github.com/dotnetCarpenter/keep-playing-youtube",
 	"icons": {
 		"48": "icons/icon_dark.svg",
 		"64": "icons/icon_dark.svg",
@@ -10,22 +11,21 @@
 		"128": "icons/icon_dark.svg"
 	},
 	"host_permissions": [
-		"https://music.youtube.com/watch*",
-		"https://wwww.youtube.com/*",
-		"https://m.youtube.com/*"
+		"https://*.youtube.com/watch*"
 	],
 	"content_scripts": [
 		{
 			"matches": [
-				"https://music.youtube.com/watch*",
-				"https://wwww.youtube.com/*",
-				"https://m.youtube.com/*"
+				"https://*.youtube.com/watch*"
 			],
-			"js": [
-				"content_script.js"
-			]
+			"js": ["content_script.js"]
 		}
 	],
+	"browser_specific_settings": {
+		"gecko": {
+			"id": "keep-playing-youtube@example.com"
+		}
+	},
 	"action": {
 		"browser_style": true,
 		"default_icon": {

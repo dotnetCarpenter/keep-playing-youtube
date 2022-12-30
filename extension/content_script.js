@@ -8,15 +8,15 @@ const MaybeSymbol = Symbol.for ("Maybe")
 const Just = x => ({
   map (f) { return Just (f (x)) },
   of (x) { return Just (x) },
-  chain (f) { return this.map (x) },
-  join (Maybe) { return Maybe.chain (x => x) },
+  // chain (f) { return this.of (this.map (f)) },
+  // join (Maybe) { return Maybe.chain (x => x) },
   [MaybeSymbol]: JustSymbol,
 })
 
 const Nothing = () => ({
   map () { return this },
-  chain () { return this },
-  join (Maybe) { return Maybe.chain (x => x) },
+  // chain () { return this },
+  // join (Maybe) { return Maybe.chain (x => x) },
   [MaybeSymbol]: NothingSymbol,
 
 })
@@ -40,13 +40,16 @@ const flip = f => a => b => f (b) (a)
 
 const trace = msg => x => (console.debug (msg, x), x)
 
+const querySelector = document.querySelector.bind (document)
+const querySelectorAll = document.querySelectorAll.bind (document)
+
 //    getElement :: String -> Maybe HtmlElement
 const getElement = compose (Maybe)
-                           (document.querySelector.bind (document))
+                           (querySelector)
 
 //    getAllElements :: String -> Array Maybe HtmlElement
 const getAllElements = compose (map (Maybe))
-                               (document.querySelectorAll.bind (document))
+                               (querySelectorAll)
 
 //    clickYes :: HtmlElement -> Boolean
 const clickYes = button => button.dispatchEvent (new MouseEvent("click"))
@@ -60,15 +63,18 @@ const on = eventName => f => HtmlElement => {
 //    keepPlaying ::
 const keepPlaying = on ("pause")
                        (pipe (
+                          trace ("we detected that the youtube video stopped"),
                           getElement ("tp-yt-paper-dialog #button"), // Maybe HtmlElement
+                          trace ("did we find the button?"),
                           map (clickYes),  // Maybe Boolean
                           trace ("Clicked yes"),
                        ))
 
 // MAIN
 map (map (keepPlaying))
-    (getAllElements ("video"))
+    (getAllElements ("video"));
 
+console.log ('reloaded')
 
 //    main :: Array (Maybe HtmlElement) ->
 // const main = pipe (
