@@ -3,6 +3,7 @@
 
 const attachHandler = f => HtmlElement => {
   HtmlElement.addEventListener ("pause", f)
+  console.debug ("HtmlElement", HtmlElement)
 }
 
 const videoElements = document.querySelectorAll ("video")
@@ -17,10 +18,14 @@ const clickPlay = () => {
   }
 }
 
-const waitBeforeQuerying = 1000
+const delay = f => msDelay => () => {
+  setTimeout (f, msDelay)
+  console.debug (`Will call ${f.name} in ${msDelay} ms`)
+}
+
+const msDelayBeforeQuerying = 1000
 
 Array.prototype.forEach.call (
   videoElements,
-  attachHandler (setTimeout (clickPlay, waitBeforeQuerying)))
-
-console.debug ('reloaded')
+  attachHandler (delay (clickPlay)
+                       (msDelayBeforeQuerying)))
