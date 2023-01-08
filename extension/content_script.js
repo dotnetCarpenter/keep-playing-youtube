@@ -23,7 +23,7 @@ const delay = f => msDelay => () => {
   console.debug (`Will call ${f.name} in ${msDelay} ms`)
 }
 
-const msDelayBeforeQuerying = 1000
+const msDelayBeforeQuerying = 500
 
 Array.prototype.forEach.call (
   videoElements,

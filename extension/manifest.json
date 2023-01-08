@@ -2,62 +2,34 @@
 	"manifest_version": 3,
 	"name": "Keep Playing YouTube",
 	"description": "Auto press the \"Video paused. Continue watching?\" button",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"homepage_url": "https://github.com/dotnetCarpenter/keep-playing-youtube",
-	"icons": {
-		"48": "icons/icon_dark.svg",
-		"64": "icons/icon_dark.svg",
-		"96": "icons/icon_dark.svg",
-		"128": "icons/icon_dark.svg"
-	},
 	"host_permissions": [
 		"https://*.youtube.com/watch*"
 	],
-	"content_scripts": [
-		{
-			"matches": [
-				"https://*.youtube.com/watch*"
-			],
-			"js": ["content_script.js"]
-		}
-	],
+	"content_scripts": [{
+		"matches": [
+			"https://*.youtube.com/watch*"
+		],
+		"js": ["content_script.js"]
+	}],
 	"browser_specific_settings": {
 		"gecko": {
 			"id": "keep-playing-youtube@example.com"
 		}
 	},
+	"icons": {
+		"1": "icons/icon-black.svg"
+	},
 	"action": {
+		"theme_icons": [{
+			"dark": "icons/icon-black.svg",
+			"light": "icons/icon-white.svg",
+			"size": 1
+		}],
 		"browser_style": true,
-		"default_icon": {
-			"48": "icons/icon_dark.svg",
-			"64": "icons/icon_dark.svg",
-			"96": "icons/icon_dark.svg",
-			"128": "icons/icon_dark.svg"
-		},
 		"default_popup": "action/index.html",
-		"default_title": "Video paused. Continue watching?",
-		"theme_icons": [
-      {
-        "dark": "icon_dark.svg",
-        "light": "icon-light.svg",
-        "size": 64
-      },
-      {
-        "dark": "icon_dark.svg",
-        "light": "icon-light.svg",
-        "size": 48
-      },
-      {
-        "dark": "icon_dark.svg",
-        "light": "icon-light.svg",
-        "size": 32
-      },
-      {
-        "dark": "icon_dark.svg",
-        "light": "icon-light.svg",
-        "size": 16
-      }
-    ]
+		"default_title": "Video paused. Continue watching?"
 	},
 	"options_ui": {
 		"page": "options/index.html"
