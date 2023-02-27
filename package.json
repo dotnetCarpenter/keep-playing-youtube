@@ -1,9 +1,10 @@
 {
   "name": "keep-playing-youtube",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "description": "Auto press the \"Video paused. Continue watching?\" button",
   "scripts": {
     "start": "web-ext run --source-dir ./extension/ --devtools --firefox firefoxdeveloperedition",
+    "build": "web-ext build --source-dir ./extension/ --overwrite-dest",
     "test": "web-ext lint --source-dir=\"./extension/\"",
     "info": "node --version && npm --version && web-ext --version"
   },
@@ -11,6 +12,6 @@
   "license": "ISC",
   "private": true,
   "devDependencies": {
-    "web-ext": "^7.4.0"
+    "web-ext": "^7.5.0"
   }
 }
