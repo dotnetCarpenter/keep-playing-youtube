@@ -41,7 +41,7 @@ const clickPlay = () => {
   else console.debug ('Could not find any button to click on')
 }
 
-const msDelayBeforeQuerying = 500
+const msDelayBeforeQuerying = 400
 const clickAfterDelay = attachHandler (delay (clickPlay)
                                              (msDelayBeforeQuerying))
 const videoElements = document.getElementsByTagName ("video")

@@ -7,26 +7,32 @@
 	"host_permissions": [
 		"https://*.youtube.com/watch*"
 	],
-	"content_scripts": [{
-		"matches": [
-			"https://*.youtube.com/watch*"
-		],
-		"js": ["content_script.js"]
-	}],
+	"content_scripts": [
+		{
+			"matches": [
+				"https://*.youtube.com/watch*"
+			],
+			"js": [
+				"content_script.js"
+			]
+		}
+	],
 	"browser_specific_settings": {
 		"gecko": {
 			"id": "keep-playing-youtube@example.com"
 		}
 	},
 	"icons": {
-		"1": "icons/icon-black.svg"
+		"1": "icons/icon-white.svg"
 	},
 	"action": {
-		"theme_icons": [{
-			"dark": "icons/icon-black.svg",
-			"light": "icons/icon-white.svg",
-			"size": 1
-		}],
+		"theme_icons": [
+			{
+				"dark": "icons/icon-black.svg",
+				"light": "icons/icon-white.svg",
+				"size": 1
+			}
+		],
 		"browser_style": true,
 		"default_popup": "action/index.html",
 		"default_title": "Video paused. Continue watching?"
