@@ -1,13 +1,15 @@
 {
   "name": "keep-playing-youtube",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Auto press the \"Video paused. Continue watching?\" button",
   "scripts": {
     "start": "web-ext run --source-dir ./extension/ --devtools --firefox firefoxdeveloperedition",
     "build": "web-ext build --source-dir ./extension/ --overwrite-dest",
     "test": "web-ext lint --source-dir=\"./extension/\"",
-    "info": "node --version && npm --version && web-ext --version"
+    "info": "node --version && npm --version && web-ext --version",
+    "bump": "./scripts/bump_version.js | ./scripts/update_version.js"
   },
+  "type": "module",
   "author": "dotnetcarpenter",
   "license": "ISC",
   "private": true,
