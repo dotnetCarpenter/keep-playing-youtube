@@ -6,13 +6,6 @@ import { resolve }      from "node:path"
 import   process        from "node:process"
 import { map, zipWith } from "./utils.js"
 
-
-const end = error => (
-    error == null
-        ? process.exit (0)
-        : (console.error (error), process.exit (1))
-)
-
 //    updateVersion :: Object -> String -> Json String
 const updateVersion = pkg => version => JSON.stringify ({ ...pkg, version }, null, "\t")
 
@@ -31,7 +24,7 @@ const readStdIn = f => {
         }
     })
 
-    process.stdin.on("end", () => {
+    process.stdin.on ("end", () => {
         // console.debug ("Call f with", version.toString())
         f (version.toString())
     })
@@ -47,7 +40,7 @@ const files = [
 ]
 
 //    writePackages :: [(a -> void)]
-const writePackages = map (path => data => { writeFile (path, data, console.error) })
+const writePackages = map (path => data => writeFile (path, data, console.error))
                           (files)
 
 readStdIn (version => {                                 // String
