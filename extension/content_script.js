@@ -49,3 +49,8 @@ const videoElements = document.getElementsByTagName ("video")
 // do we need to know if the document has loaded?
 map (clickAfterDelay)
     (videoElements)
+
+if (videoElements.length > 0)
+  console.debug (`Found ${videoElements.length} video element ${videoElements.length > 1 ? "s" : ""}.`)
+else
+  console.debug ("Did not find any video elements. Keep Playing YouTube will do nothing.")
