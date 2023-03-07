@@ -47,7 +47,7 @@ const clickAfterPauseAndDelay = listenForPause (delay (clickPlay)
 
 const addPauseHandlerTo = map (clickAfterPauseAndDelay)
 
-document.addEventListener ("load", () => {
+const main = () => {
   const videoElements = document.getElementsByTagName ("video")
   const numberOfVideoElements = size (videoElements)
 
@@ -57,4 +57,10 @@ document.addEventListener ("load", () => {
     console.debug (`Found ${numberOfVideoElements} video element ${numberOfVideoElements > 1 ? "s" : ""}.`)
   else
     console.debug ("Did not find any video elements. Keep Playing YouTube will do nothing.")
-})
+
+  // clean up
+  document.removeEventListener ("load", main)
+}
+
+if (document.readyState === "complete") main ()
+else document.addEventListener ("load", main)
