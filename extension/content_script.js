@@ -49,7 +49,7 @@ const addPauseHandlerTo = map (clickAfterPauseAndDelay)
 
 document.addEventListener ("load", () => {
   const videoElements = document.getElementsByTagName ("video")
-  const numberOfVideoElements = videoElements.length
+  const numberOfVideoElements = size (videoElements)
 
   addPauseHandlerTo (videoElements)
 
