@@ -32,12 +32,10 @@ const delay = f => msDelay => () => {
   console.debug (`Will call ${f.name} in ${msDelay} ms`)
 }
 
-const click = map (HtmlElement => { HtmlElement.click (); console.debug ("Clicked on", HtmlElement) })
-
 //    clickPlay :: () -> Void
 const clickPlay = () => {
-  const buttons = document.querySelectorAll (
-    "tp-yt-paper-dialog button, tp-yt-paper-toast yt-touch-feedback-shape .yt-spec-touch-feedback-shape")
+  const click = map (HtmlElement => { HtmlElement.click (); console.debug ("Clicked on", HtmlElement) })
+  const buttons = document.querySelectorAll("tp-yt-paper-dialog button")
 
   if (size (buttons)) click (buttons)
   else console.debug ('Could not find any button to click on')
