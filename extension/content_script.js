@@ -19,8 +19,8 @@ const size = elements => (
     : 0
 )
 
-//    attachHandler :: (a -> b) -> HtmlElement -> HtmlElement
-const attachHandler = f => HtmlElement => {
+//    listenForPause :: (a -> b) -> HtmlElement -> HtmlElement
+const listenForPause = f => HtmlElement => {
   HtmlElement.addEventListener ("pause", f, true)
   console.debug ("HtmlElement", HtmlElement)
   return HtmlElement
@@ -42,15 +42,19 @@ const clickPlay = () => {
 }
 
 const msDelayBeforeQuerying = 400
-const clickAfterDelay = attachHandler (delay (clickPlay)
-                                             (msDelayBeforeQuerying))
-const videoElements = document.getElementsByTagName ("video")
+const clickAfterPauseAndDelay = listenForPause (delay (clickPlay)
+                                                      (msDelayBeforeQuerying))
 
-// do we need to know if the document has loaded?
-map (clickAfterDelay)
-    (videoElements)
+const addPauseHandlerTo = map (clickAfterPauseAndDelay)
 
-if (videoElements.length > 0)
-  console.debug (`Found ${videoElements.length} video element ${videoElements.length > 1 ? "s" : ""}.`)
-else
-  console.debug ("Did not find any video elements. Keep Playing YouTube will do nothing.")
+document.addEventListener ("load", () => {
+  const videoElements = document.getElementsByTagName ("video")
+  const numberOfVideoElements = videoElements.length
+
+  addPauseHandlerTo (videoElements)
+
+  if (numberOfVideoElements > 0)
+    console.debug (`Found ${numberOfVideoElements} video element ${numberOfVideoElements > 1 ? "s" : ""}.`)
+  else
+    console.debug ("Did not find any video elements. Keep Playing YouTube will do nothing.")
+})
