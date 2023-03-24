@@ -1,6 +1,6 @@
 {
 	"name": "keep-playing-youtube",
-	"version": "0.2.7",
+	"version": "0.3.2",
 	"description": "Auto press the \"Video paused. Continue watching?\" button",
 	"scripts": {
 		"start": "web-ext run --source-dir ./extension/ --devtools --firefox firefoxdeveloperedition",

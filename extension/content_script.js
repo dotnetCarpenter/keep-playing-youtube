@@ -1,4 +1,3 @@
-// @ts-check
 "use strict"
 
 //    map :: (a -> b) -> [a] -> [b]
@@ -28,7 +27,7 @@ const listenForPause = f => HtmlElement => {
 
 //    delay :: (a -> Vpod) -> Number -> () -> Void
 const delay = f => msDelay => () => {
-  setTimeout (f, msDelay)
+  window.setTimeout (f, msDelay)
   console.debug (`Will call ${f.name} in ${msDelay} ms`)
 }
 
@@ -55,14 +54,36 @@ const main = () => {
 
   addPauseHandlerTo (videoElements)
 
-  if (numberOfVideoElements > 0)
-    console.debug (`Found ${numberOfVideoElements} video element ${numberOfVideoElements > 1 ? "s" : ""}.`)
-  else
-    console.debug ("Did not find any video elements. Keep Playing YouTube will do nothing.")
-
-  // clean up
-  document.removeEventListener ("load", main)
+  if (numberOfVideoElements > 0) {
+    const message = `Found ${numberOfVideoElements} video element ${numberOfVideoElements > 1 ? "s" : ""}.`
+    console.debug (message)
+    browser.runtime.sendMessage ({code: 0, message})
+  } else {
+    const message = "Did not find any video elements. Keep Playing YouTube will do nothing."
+    window.addEventListener ("load", function () {
+      main ()
+      console.debug ("began on load")
+      window.removeEventListener ("load", this)
+    })
+    console.debug (message)
+    browser.runtime.sendMessage ({code: 1, message})  }
 }
 
-if (document.readyState === "complete") main ()
-else document.addEventListener ("load", main)
+// detect ready state
+if (document.readyState === "complete") {
+  // Handle it asynchronously to allow scripts the opportunity to delay ready
+  window.setTimeout (main, 0)
+} else {
+  // Use DOMContentLoaded event callback
+  document.addEventListener ("DOMContentLoaded", removeReadyListeners, false)
+  // A fallback to window.onload, that will always work
+  window.addEventListener("load", removeReadyListeners, false )
+}
+
+function removeReadyListeners () {
+  // remove listeners
+  document.removeEventListener ("DOMContentLoaded", removeReadyListeners, false)
+  window.removeEventListener ("load", removeReadyListeners, false)
+
+  main ()
+}
